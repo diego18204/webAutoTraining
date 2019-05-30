@@ -1,12 +1,14 @@
 package com.automation.uitests;
 
+import com.automation.DataProviders;
 import com.automation.PageData;
 import com.automation.pageobjects.WikiHomePageEs;
 
-import org.json.simple.JSONArray;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import org.json.simple.JSONArray;
 
 import java.util.Arrays;
 
@@ -50,4 +52,10 @@ public class WikiTestsEs extends BaseTest {
             Assert.assertEquals(home.actualProjectTitles.get(i).getText(), projectTitles[i]);
         }
     }
+
+    @Test(dataProvider = "projectNames_provider", dataProviderClass = DataProviders.class)
+    public void leftColumnProjects_Correct_withDataProvider(int index, String projectName) {
+            Assert.assertEquals(home.actualProjectTitles.get(index).getText(), projectName);
+        }
+
 }
